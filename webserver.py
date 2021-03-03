@@ -9,7 +9,7 @@ def index():
     if "docs.raspimote.tk" in request.url_root:
         return send_file("index.html")
     elif "www.raspimote.tk" in request.url_root:
-        return redirect(request.url.replace("www.raspimote.tk", "raspimote.tk"))
+        return redirect(request.url.replace("www.raspimote.tk", "raspimote.tk")), 301
     elif "raspimote.tk" in request.url_root:
         return send_file("root_website.html")
     else:
