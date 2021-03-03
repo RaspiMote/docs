@@ -9,28 +9,28 @@ def index():
     if "docs.raspimote.tk" in request.url_root:
         return send_file("index.html")
     else:
-        return "<h1>Nothing here</h1>", 404
+        return "<h1>Nothing here, for the moment...</h1>", 404
 
 @app.route('/css/<path:path>')
 def css(path):
-    if "docs.raspimote.tk" in request.url_root:
+    if "raspimote.tk" in request.url_root:
         return send_from_directory('css', path)
     else:
-        return "<h1>Nothing here</h1>", 404
+        return "<h1>Nothing here, for the moment...</h1>", 404
 
 @app.route('/img/<path:path>')
 def img(path):
-    if "docs.raspimote.tk" in request.url_root:
+    if "raspimote.tk" in request.url_root:
         return send_from_directory('img', path)
     else:
-        return "<h1>Nothing here</h1>", 404
+        return "<h1>Nothing here, for the moment...</h1>", 404
 
 @app.route('/js/<path:path>')
 def js(path):
-    if "docs.raspimote.tk" in request.url_root:
+    if "raspimote.tk" in request.url_root:
         return send_from_directory('js', path)
     else:
-        return "<h1>Nothing here</h1>", 404
+        return "<h1>Nothing here, for the moment...</h1>", 404
 
 
 
