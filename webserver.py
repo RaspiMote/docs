@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file, send_from_directory
+from flask import Flask, request, send_file, send_from_directory, redirect
 from cheroot.wsgi import Server as WSGIServer, PathInfoDispatcher as WSGIPathInfoDispatcher
 from cheroot.ssl.builtin import BuiltinSSLAdapter
 
@@ -8,6 +8,10 @@ app = Flask(__name__)
 def index():
     if "docs.raspimote.tk" in request.url_root:
         return send_file("index.html")
+    elif "www.raspimote.tk" in request.url_root:
+        return redirect(request.url.replace("www.raspimote.tk", "raspimote.tk"))
+    elif "raspimote.tk" in request.url_root:
+        return send_file("root_website.html")
     else:
         return "<h1>Nothing here, for the moment...</h1>", 404
 
@@ -22,6 +26,13 @@ def css(path):
 def img(path):
     if "raspimote.tk" in request.url_root:
         return send_from_directory('img', path)
+    else:
+        return "<h1>Nothing here, for the moment...</h1>", 404
+
+@app.route('/fonts/<path:path>')
+def fonts(path):
+    if "raspimote.tk" in request.url_root:
+        return send_from_directory('fonts', path)
     else:
         return "<h1>Nothing here, for the moment...</h1>", 404
 
