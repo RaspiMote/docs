@@ -1,6 +1,8 @@
 window.onload = init;
 
 function init() {
+    var year = new Date().getFullYear();
+    document.getElementById("footer").innerHTML = year + ", RaspiMote.";
     $(".fade").fadeOut(1500);
 }
 
