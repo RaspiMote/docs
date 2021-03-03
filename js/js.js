@@ -103,3 +103,9 @@ window.addEventListener('load', function(){
   icon.addEventListener('click', showNav);
 });
 
+window.onload = init;
+
+function init() {
+    var year = new Date().getFullYear();
+    document.getElementById("footer").innerHTML = year + ", RaspiMote.";
+}
