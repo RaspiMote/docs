@@ -15,16 +15,22 @@ def index():
 def css(path):
     if request.url_root == "https://docs.raspimote.tk":
         return send_from_directory('css', path)
+    else:
+        return "<h1>Nothing here</h1>", 404
 
 @app.route('/img/<path:path>')
 def img(path):
     if request.url_root == "https://docs.raspimote.tk":
         return send_from_directory('img', path)
+    else:
+        return "<h1>Nothing here</h1>", 404
 
 @app.route('/js/<path:path>')
 def js(path):
     if request.url_root == "https://docs.raspimote.tk":
         return send_from_directory('js', path)
+    else:
+        return "<h1>Nothing here</h1>", 404
 
 
 
