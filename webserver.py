@@ -6,7 +6,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    print(request.url_root)
     if "docs.raspimote.tk" in request.url_root:
         return send_file("index.html")
     else:
