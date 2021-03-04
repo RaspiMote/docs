@@ -2,10 +2,6 @@ window.onload = init;
 // $('*').on('click', function(){ return true; });
 // navigator.appVersion.toLowerCase().includes("iphone")
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}  
-
 function init() {
     var year = new Date().getFullYear();
     document.getElementById("footer").innerHTML = year + ", RaspiMote.";
@@ -35,16 +31,6 @@ function makeWhite(el) {
 
 function makeTransparent(el) {
     if (navigator.appVersion.toLowerCase().includes("iphone") == false && navigator.appVersion.toLowerCase().includes("ipad") == false) {
-        el.style.backgroundColor = "#ffffff00";
-        el.style.filter = "invert(0)";
-    }
-}
-
-function selectButtonWKi(el) {
-    if (navigator.appVersion.toLowerCase().includes("iphone") || navigator.appVersion.toLowerCase().includes("ipad")) {
-        el.style.backgroundColor = "black";
-        el.style.filter = "invert(100%)";
-        await sleep(1000);
         el.style.backgroundColor = "#ffffff00";
         el.style.filter = "invert(0)";
     }
