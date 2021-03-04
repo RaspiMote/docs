@@ -28,12 +28,10 @@ function toGitHub() {
 
 function makeWhite(el) {
     el.style.backgroundColor = "black";
-    el.style.color = "white";
     el.style.filter = "invert(100%)";
 }
 
 function makeTransparent(el) {
     el.style.backgroundColor = "#ffffff00";
-    el.style.color = "white";
     el.style.filter = "invert(0)";
 }
