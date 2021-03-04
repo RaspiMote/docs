@@ -23,15 +23,16 @@ function init() {
 }
 
 function makeWhite(el) {
-    if (navigator.appVersion.toLowerCase().includes("iphone") == false) {
-        el.style.backgroundColor = "black";
-        el.style.filter = "invert(100%)";
-    }
+    el.style.backgroundColor = "black";
+    el.style.filter = "invert(100%)";
+    elements = ["docs", "github"];
+    var backTransparent = [...elements].reverse()[elements.indexOf(el.id)];
+    backTransparent = document.getElementById(backTransparent);
+    backTransparent.style.backgroundColor = "#ffffff00";
+    backTransparent.style.filter = "invert(0)";
 }
 
 function makeTransparent(el) {
-    if (navigator.appVersion.toLowerCase().includes("iphone") == false && navigator.appVersion.toLowerCase().includes("ipad") == false) {
-        el.style.backgroundColor = "#ffffff00";
-        el.style.filter = "invert(0)";
-    }
+    el.style.backgroundColor = "#ffffff00";
+    el.style.filter = "invert(0)";
 }
