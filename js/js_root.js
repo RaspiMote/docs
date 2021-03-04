@@ -1,4 +1,10 @@
 window.onload = init;
+// $('*').on('click', function(){ return true; });
+// navigator.appVersion.toLowerCase().includes("iphone")
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}  
 
 function init() {
     var year = new Date().getFullYear();
@@ -21,11 +27,25 @@ function init() {
 }
 
 function makeWhite(el) {
-    el.style.backgroundColor = "black";
-    el.style.filter = "invert(100%)";
+    if (navigator.appVersion.toLowerCase().includes("iphone") == false) {
+        el.style.backgroundColor = "black";
+        el.style.filter = "invert(100%)";
+    }
 }
 
 function makeTransparent(el) {
-    el.style.backgroundColor = "#ffffff00";
-    el.style.filter = "invert(0)";
+    if (navigator.appVersion.toLowerCase().includes("iphone") == false) {
+        el.style.backgroundColor = "#ffffff00";
+        el.style.filter = "invert(0)";
+    }
+}
+
+function selectButtonWKi(el) {
+    if (navigator.appVersion.toLowerCase().includes("iphone")) {
+        el.style.backgroundColor = "black";
+        el.style.filter = "invert(100%)";
+        await sleep(1000);
+        el.style.backgroundColor = "#ffffff00";
+        el.style.filter = "invert(0)";
+    }
 }
