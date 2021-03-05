@@ -15,6 +15,11 @@ def index():
     else:
         return "<h1>Nothing here, for the moment...</h1>", 404
 
+@app.route('/mailto')
+def mailto():
+    if (not "docs.raspimote.tk" in request.url_root) and ("raspimote.tk" in request.url_root):
+        return redirect("mailto:hello@raspimote.tk")
+
 @app.route('/css/<path:path>')
 def css(path):
     if "raspimote.tk" in request.url_root:
