@@ -1,6 +1,4 @@
 window.onload = init;
-// $('*').on('click', function(){ return true; });
-// navigator.appVersion.toLowerCase().includes("iphone")
 
 function init() {
     var year = new Date().getFullYear();
