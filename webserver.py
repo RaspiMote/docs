@@ -4,6 +4,12 @@ from cheroot.ssl.builtin import BuiltinSSLAdapter
 
 app = Flask(__name__)
 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return send_file('404.html'), 404
+
 @app.route('/')
 def index():
     if "docs.raspimote.tk" in request.url_root:
