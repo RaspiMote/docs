@@ -4,6 +4,7 @@ from cheroot.ssl.builtin import BuiltinSSLAdapter
 
 app = Flask(__name__)
 
+mobile_user_agents = ["opera mini", "android", "fennec", "mobile", "iphone", "symbian", "blackberry", "nexus", "nokia"]
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -17,7 +18,10 @@ def index():
     elif "www.raspimote.tk" in request.url_root:
         return redirect(request.url.replace("www.raspimote.tk", "raspimote.tk")), 301
     elif "raspimote.tk" in request.url_root:
-        return send_file("root_website.html")
+        if any(ext in request.headers.get('User-Agent').lower() for ext in mobile_user_agents):
+            return send_file("root_website_mob.html")
+        else:
+            return send_file("root_website.html")
     else:
         return "<h1>Nothing here, for the moment...</h1>", 404
 

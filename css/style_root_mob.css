@@ -1,0 +1,119 @@
+@font-face {
+    font-family: 'Caviar_Dreams';
+    src: url('../fonts/caviar_dreams_bold-webfont.woff2') format('woff2'),
+         url('../fonts/caviar_dreams_bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'L_G_C';
+    src: url('../fonts/louis_george_cafe-webfont.woff2') format('woff2'),
+         url('../fonts/louis_george_cafe-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.no-js #loader {
+    display: none;
+}
+
+.js #loader {
+    display: block;
+    position: absolute;
+    left: 100px;
+    top: 0;
+}
+
+.fade {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: center no-repeat white;
+}
+
+.gradient {
+    position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+    background: linear-gradient(#d66f2b , #c94067 );
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.top_logo {
+    width: 20vw;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3vw;
+}
+
+h1 {
+    color: white;
+    font-family: "Caviar_Dreams";
+    font-weight: bold;
+    text-align: center;
+    font-size: 15vw;
+    margin-top: 3vw;
+    margin-bottom: 2vw;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+    width: 80vw;
+}
+
+td {
+    border: none;
+    border-radius: 5vw;
+}
+
+.icon {
+    height: 6vw;
+}
+
+p {
+    color: white;
+    text-align: center;
+    font-family: "L_G_C";
+    font-size: 6vw;
+    margin-bottom: 3vw;
+    max-width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer {
+    color: white;
+    text-align: right;
+    font-family: "L_G_C";
+    font-size: 4vw;
+    margin-top: 4vw;
+    margin-right: 1vw;
+}
+
+.full_td {
+    height: 100%;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-family: "L_G_C";
+    font-size: 7vw;
+}
+
+a {
+    text-decoration: none;
+}
