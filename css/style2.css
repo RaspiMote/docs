@@ -194,7 +194,6 @@ nav {
 .toggle {
   display: none;
   position: relative;
-  left: -50px;
 }
 
 .toggle span,

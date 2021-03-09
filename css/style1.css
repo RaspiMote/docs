@@ -7,15 +7,17 @@ html, body {
 }
 
 .logo_img {
+  float: right;
+  margin-left: auto;
   width: 80px;
-  margin-left: 4vw;
+  margin-right: 2vw;
   margin-top: 10px;
 }
 
 /* layout */
 .header {
   border-bottom: 1px solid var(--code-bg-color);
-  grid-template-columns: 1fr 150px 60% 1fr;
+  grid-template-columns: 1fr 50px 60% 1fr;
 }
 
 .wrapper {
@@ -142,7 +144,7 @@ blgreen {
   }
   .doc__nav ul.fixed {
     /* nutralized the fixed menu for mobile*/
-    position: relative;
+    position: absolute;
     top: 0;
   }
   .doc__nav li {
