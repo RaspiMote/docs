@@ -8,7 +8,6 @@ mobile_user_agents = ["opera mini", "android", "fennec", "mobile", "iphone", "sy
 
 @app.errorhandler(404)
 def page_not_found(e):
-    # note that we set the 404 status explicitly
     return send_file('404.html'), 404
 
 @app.route('/')
