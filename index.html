@@ -30,7 +30,7 @@
         <ul>
           <li class="js-btn selected">Description</li>
           <li class="js-btn">Getting started</li>
-          <li class="js-btn">Basic setup</li>
+          <li class="js-btn">Basic setup on Pi</li>
           <li class="js-btn">Running</li>
           <li class="js-btn">Creating custom functions</li>
         </ul>
@@ -38,7 +38,7 @@
       <article class="doc__content">
         <section class="js-section">
           <h3 class="section__title">Description</h3>
-          
+
 
           <p>
             You want to turn your Raspberry Pi into a programmable keyboard / controller / remote control? RaspiMote is what you need!
@@ -119,102 +119,102 @@
             </pre>
           </section>
           <section class="js-section">
-            <h3 class="section__title">Basic setup</h3>
+            <h3 class="section__title">Basic setup on Pi</h3>
 
             <p>
               The main purpose of RaspiMote is to allow you to create your own functions that will fit your needs (for provided functions, see <a href="#builtinfunct">Built-in functions</a>).<br/>
-              The process is divided in two parts:
+              We will see a few examples of configurations that you can easily test with your Raspberry Pi.
           </p>
-  
+
+          <h4>&nbsp;&nbsp; Created The Pi object</h4>
+          <p>
+            Your main.py file must start by creating a Pi() object wich take a few parameters :
+            <code class="micro_code">pi = Pi(IP_ADDRESS, CONNECTION_MODE, VERBOSE)</code>
+
+            <ul>
+                <li><code class="micro_code">IP_ADDRESS</code> is your computer's IP address;</li>
+                <li><code class="micro_code">CONNECTION_MODE</code> is the connection mode that you will be using (only Wi-Fi for the moment)</li>
+                <li><code class="micro_code">VERBOSE</code> can be set to True to see verbose messages (you might want to use it when writing your main.py file)</li>
+            </ul>
+
+
+          </p>
+
+          <h4>&nbsp;&nbsp; Adding Input Devices</h4>
+          <p>
+              The Pi class comes with a set of basic devices that you can add just by calling the method. Those methods are listed in the section (link) below.
+          </p>
           <ul>
-              <li>writing Pi’s code to add your inputs;</li>
-              <li>writing driver’s code to connect those inputs to functions.</li>
+              <li>GPIO buttons;</li>
+              <li>USB devices (keyboards, mice);</li>
+              <li>USB Controllers (tested with xbox one controllers)</li>
           </ul>
-  
-          <h4>&nbsp;&nbsp; Pi</h4>
+
+          <h4>&nbsp;&nbsp; GPIO Buttons</h4>
+
           <p>
-              You will need to customise your RaspiMote Pi script to add your physical inputs.<br>The <code>Pi</code> class comes with some premade input methods (check methods’ docstring to see the parameters) :
-          </p>
-          <ul>
-              <li>buttons;</li>
-              <li>USB HID devices (keyboards, mice);</li>
-              <li>Analog Digital Converters (ADC).</li>
-          </ul>
-  
-          <p>
-              When creating the <code class="micro_code">Pi</code> object, you can add a configuration dictionary, see the following example:
-          </p>
-  
-          <code class="micro_code">
-              pi = Pi([<br/>
-                  &nbsp; {"pin": "21", "type_input": "button"},<br/>
-                  &nbsp; {"pin": "20", "type_input": "button"},<br/>
-                  &nbsp; {"pin": "16", "type_input": "button"},<br/>
-                  &nbsp; {"pin": "6", "type_input": "button"},<br/>
-                  &nbsp; {"pin": "13", "type_input": "button"},<br/>
-                  &nbsp; {"pin": "19", "type_input": "button"},<br/>
-                  &nbsp; {"pin": "26", "type_input": "button"},<br/>
-              ])
+            You can several buttons connected to the Raspbery Pi GPIO pins by calling <code class="micro_code">add_buttons(BUTTONS_CONFIGURATION)</code>.
+            <code class="micro_code">BUTTONS_CONFIGURATION</code> must be of the following form : <br/>
+            <code class="micro_code">
+                [<br/>
+                    &nbsp; {"pin": "21", "type_input": "button"},<br/>
+                    &nbsp; {"pin": "20", "type_input": "button"},<br/>
+                    &nbsp; {"pin": "16", "type_input": "button"},<br/>
+                    &nbsp; {"pin": "6", "type_input": "button"},<br/>
+                    &nbsp; {"pin": "13", "type_input": "button"},<br/>
+                    &nbsp; {"pin": "19", "type_input": "button"},<br/>
+                    &nbsp; {"pin": "26", "type_input": "button"},<br/>
+                ]
           </code>
-  
-          <p>
-              This only works for buttons for the moment.<br>If you want to add USB and ADC devices, use the dedicated methods with this code (this is only an example):
-          </p>
-  
-          <code class="micro_code">
-              pi.add_ADC_Device_PCF8591(2)<br/>
-              pi.add_USB_Device(1)<br/>
-              pi.add_USB_Device(4)
-          </code>
-  
-          <h4>&nbsp;&nbsp; Driver</h4>
-          <p>
-              After having added your inputs to the Raspberry Pi, you need to decide what they will do on your PC. You must customise <code class="micro_code">./driver/lan_server/command_processor.py</code>, in <code class="micro_code">parse_data()</code> function, you can write your code. See <a href="#builtinfunct">Built-in functions</a> section to see what features are available or write your own ones.
-          </p>
-          <p>
-              Example of a USB keyboard that writes mathematical symbols:
-          </p>
-
-          <div class="code__block code__block--notabs">
-            <pre class="code code--block">
-              <code>
-                key_to_char = {
-                  &nbsp; <marron>"KEY_Q"</marron>: <marron>"α"</marron>,
-                  &nbsp; <marron>"KEY_W"</marron>: <marron>"β"</marron>,
-                  &nbsp; <marron>"KEY_E"</marron>: <marron>"π"</marron>,
-                  &nbsp; <marron>"KEY_R"</marron>: <marron>"ω"</marron>,
-                  &nbsp; <marron>"KEY_T"</marron>: <marron>"Δ"</marron>,
-                  &nbsp; <marron>"KEY_Y"</marron>: <marron>"≈"</marron>,
-                  &nbsp; <marron>"KEY_U"</marron>: <marron>"√"</marron>,
-                  &nbsp; <marron>"KEY_I"</marron>: <marron>"∞"</marron>,
-                  &nbsp; <marron>"KEY_O"</marron>: <marron>"≠"</marron>,
-              }
-              
-
-            <violet>if</violet> type_device == <marron>"USB"</marron> and pin == <lgreen>4</lgreen> and <blgreen>int</blgreen>(extra) == <lgreen>1</lgreen>:
-            &nbsp;&nbsp;&nbsp; <violet>if</violet> value <blue>in</blue> key_to_char:
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; type_text(key_to_char[value])
-      </code>
-    </pre>
-  </div>
-
-        <h4 id="builtinfunct">&nbsp;&nbsp; Built-in functions</h4>
-
-        <p>
-            With these functions, you can already perform multiple actions but don’t forget to check the function’s docstring :
         </p>
 
-        <ul>
-            <li>simulate keystroke and key combinaison (any character and function key);</li>
-            <li>change sound level;</li>
-            <li>etc...</li>
-        </ul>
+        <h4>&nbsp;&nbsp; USB devices</h4>
+          <p>
+              Pi() class has special support for mouses and keyboards. But you can still use the <code class="micro_code">add_generic_USB_device()</code> that supports any kind of USB device.
+              All of thoses methods takes an integer as parameter. You can find which number you must pass by running the <code class="micro_code">identify_usb_device.py</code> script located in the <code class="micro_code">utility/</code> folder.
+          </p>
 
+          <h5>&nbsp;&nbsp; USB Mouses</h5>
+          <p>
+            The <code class="micro_code">add_USB_mouse(INPUT_NUMBER)</code> adds the specified mouse to be listened to. This means that its buttons, scroll wheel and any movements will be sent to the driver.
+          </p>
+
+          <h5>&nbsp;&nbsp; USB Keyboards</h5>
+          <p>
+            The <code class="micro_code">add_USB_keyboard(INPUT_NUMBER)</code> adds the specified keyboard to be listened to. This means that its keys will be listened to and every events will be sent to the driver (hit, long press, release).
+          </p>
+
+          <h5>&nbsp;&nbsp; Generic USB devices</h5>
+          <p>
+            The <code class="micro_code">generic_usb_device_loop(INPUT_NUMBER, NAME)</code> adds the specified USB device to be listened to. As it is a generic device, you must pass a string to identify it in requests to the driver.
+
+
+        <h4>&nbsp;&nbsp; USB Controllers</h4>
+          <p>
+            You can add one or multiple USB Controllers by using the <code class="micro_code">add_gamepad_device()</code> for each controller.
+          </p>
+
+        <h4>&nbsp;&nbsp; Code example</h4>
+
+        <div class="code__block code__block--notabs">
+         <pre class="code code--block">
+           <code>
+               &nbsp; from pi.pi import Pi
+
+               &nbsp; verbose = True
+               &nbsp; pi = Pi("192.168.1.16", "WiFi", verbose)
+               &nbsp; pi.add_buttons_configuration([pin": "21", "type_input": "button"}, {"pin": "20", "type_input": "button"}]
+               &nbsp; pi.add_USB_keyboard(0)
+               &nbsp; pi.add_gamepad_device()
+               &nbsp; pi.add_gamepad_device()
+               &nbsp; pi.establish_connection()  # see Running (link) section
+         </code>
+       </pre>
+      </div>
 
 
 
           </section>
-
 
           <section class="js-section">
 
@@ -223,12 +223,45 @@
 
             <h4>Pi</h4>
             <p>
-                Before the system runs, you need to execute <code class="micro_code">pi.establish_connection(server_IP)</code> to initiate connection</code>.
+                Before the system runs, you need to execute <code class="micro_code">pi.establish_connection(server_IP)</code> at the end of your to initiate the connection</code>.
             </p>
-        
-            <h4>Driver</h4>
-              <p>After the Pi executed <code class="micro_code">pi.establish_connection(server_IP)</code>, you can start the driver and after it executed <code class="micro_code">driver.run()</code>, it should process your Pi’s requests.</b></p>
 
+            <h4>Request form (information)</h4>
+
+            <p>
+              Here are, for information purpose, the requests forms that the Pi() class sends to your driver for the provided devices.
+            </p>
+
+            <table style="width:100%">
+                <tr>
+                  <th>Origin</th>
+                  <th>Request Form</th>
+                </tr>
+                <tr>
+                  <td>Buttons</td>
+                  <td>{"code": [code], request": type": "button", id": "gpio_pin"", event_type": "button_event", value": 1}</td>
+                </tr>
+                <tr>
+                  <td>ADC</td>
+                  <td>{"code": [code], request": type": "ADC", id": [channel], event_type": "adc_event", value": [value]}</td>
+                </tr>
+                <tr>
+                  <td>USB Mouse</td>
+                  <td>{"code": [code], request": type": "USB", id": "mouse_[id]", event_type": [type], value": [value]}</td>
+                </tr>
+                <tr>
+                  <td>USB Keyboard</td>
+                  <td>{"code": [code], request": type": "USB", id": "keyboard_[id]", event_type": [key], value": [value]}</td>
+                </tr>
+                <tr>
+                  <td>Generic USB</td>
+                  <td>{"code": [code], request": type": "USB", id": "generic_usb_[device_name]", event_type": [data_type], value": [value]}</td>
+                </tr>
+                <tr>
+                  <td>USB Controller</td>
+                  <td>{"code": [code], request": type": "gamepad", id": [id], event_type": [type], value": [value]}</td>
+                </tr>
+          </table>
 
           </section>
 
@@ -253,7 +286,7 @@
             </div>
 
             <p>Once the above function is linked to a button, pressing the button will open this alert box:</p>
-            
+
             <img src="img/pyautogui_example.png" title="The messagebox generated with the code above." alt="The messagebox generated with the code above." class="in_text_img"/>
 
             <p>This is, of course, a very simple (and boring) example. Much complex and interesting things can be made; your imagination is the only limit!</p>
