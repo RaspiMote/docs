@@ -132,7 +132,7 @@
             <code class="micro_code">pi = Pi(IP_ADDRESS, CONNECTION_MODE, VERBOSE)</code>
 
             <ul>
-                <li><code class="micro_code">IP_ADDRESS</code> is your computer's IP address;</li>
+                <li><code class="micro_code">IP_ADDRESS</code> is your computer’s IP address;</li>
                 <li><code class="micro_code">CONNECTION_MODE</code> is the connection mode that you will be using (only Wi-Fi for the moment)</li>
                 <li><code class="micro_code">VERBOSE</code> can be set to True to see verbose messages (you might want to use it when writing your main.py file)</li>
             </ul>
@@ -170,11 +170,11 @@
 
         <h4>&nbsp;&nbsp; USB devices</h4>
           <p>
-              Pi() class has special support for mouses and keyboards. But you can still use the <code class="micro_code">add_generic_USB_device()</code> that supports any kind of USB device.
+              <code class="micro_code">Pi</code> class has special support for mice and keyboards. But you can still use the <code class="micro_code">add_generic_USB_device()</code> that supports any kind of USB device.
               All of thoses methods takes an integer as parameter. You can find which number you must pass by running the <code class="micro_code">identify_usb_device.py</code> script located in the <code class="micro_code">utility/</code> folder.
           </p>
 
-          <h5>&nbsp;&nbsp; USB Mouses</h5>
+          <h5>&nbsp;&nbsp; USB Mice</h5>
           <p>
             The <code class="micro_code">add_USB_mouse(INPUT_NUMBER)</code> adds the specified mouse to be listened to. This means that its buttons, scroll wheel and any movements will be sent to the driver.
           </p>
@@ -199,15 +199,15 @@
         <div class="code__block code__block--notabs">
          <pre class="code code--block">
            <code>
-               &nbsp; from pi.pi import Pi
+               &nbsp; <violet>from</violet> pi.pi <violet>import</violet> Pi
 
-               &nbsp; verbose = True
-               &nbsp; pi = Pi("192.168.1.16", "WiFi", verbose)
-               &nbsp; pi.add_buttons_configuration([pin": "21", "type_input": "button"}, {"pin": "20", "type_input": "button"}]
-               &nbsp; pi.add_USB_keyboard(0)
+               &nbsp; verbose = <blue>True</blue>
+               &nbsp; pi = Pi(<marron>"192.168.1.16"</marron>, <marron>"WiFi"</marron>, verbose)
+               &nbsp; pi.add_buttons_configuration([{<marron>"pin"</marron>: <marron>"21"</marron>, <marron>"type_input"</marron>: <marron>"button"</marron>}, {<marron>"pin"</marron>: <marron>"20"</marron>, <marron>"type_input"</marron>: <marron>"button"</marron>}]
+               &nbsp; pi.add_USB_keyboard(<lgreen>0</lgreen>)
                &nbsp; pi.add_gamepad_device()
                &nbsp; pi.add_gamepad_device()
-               &nbsp; pi.establish_connection()  # see Running (link) section
+               &nbsp; pi.establish_connection() <green># More details in the “Running” section.</green>
          </code>
        </pre>
       </div>
@@ -229,38 +229,42 @@
             <h4>Request form (information)</h4>
 
             <p>
-              Here are, for information purpose, the requests forms that the Pi() class sends to your driver for the provided devices.
+              Here are, for information purpose, the requests forms that the <code class="micro_code">Pi</code> class sends to your driver for the provided devices.
             </p>
 
-            <table style="width:100%">
+            <table style="width: 100%;">
+              <thead style="text-align: center;">
                 <tr>
-                  <th>Origin</th>
-                  <th>Request Form</th>
+                  <td>Origin</td>
+                  <td>Request Form</td>
                 </tr>
+              </thead>
+              <tbody>
                 <tr>
                   <td>Buttons</td>
-                  <td>{"code": [code], request": type": "button", id": "gpio_pin"", event_type": "button_event", value": 1}</td>
+                  <td><code class="micro_code">{"code": [code], request": type": "button", id": "gpio_pin"", event_type": "button_event", value": 1}</code></td>
                 </tr>
                 <tr>
                   <td>ADC</td>
-                  <td>{"code": [code], request": type": "ADC", id": [channel], event_type": "adc_event", value": [value]}</td>
+                  <td><code class="micro_code">{"code": [code], request": type": "ADC", id": [channel], event_type": "adc_event", value": [value]}</code></td>
                 </tr>
                 <tr>
                   <td>USB Mouse</td>
-                  <td>{"code": [code], request": type": "USB", id": "mouse_[id]", event_type": [type], value": [value]}</td>
+                  <td><code class="micro_code">{"code": [code], request": type": "USB", id": "mouse_[id]", event_type": [type], value": [value]}</code></td>
                 </tr>
                 <tr>
                   <td>USB Keyboard</td>
-                  <td>{"code": [code], request": type": "USB", id": "keyboard_[id]", event_type": [key], value": [value]}</td>
+                  <td><code class="micro_code">{"code": [code], request": type": "USB", id": "keyboard_[id]", event_type": [key], value": [value]}</code></td>
                 </tr>
                 <tr>
                   <td>Generic USB</td>
-                  <td>{"code": [code], request": type": "USB", id": "generic_usb_[device_name]", event_type": [data_type], value": [value]}</td>
+                  <td><code class="micro_code">{"code": [code], request": type": "USB", id": "generic_usb_[device_name]", event_type": [data_type], value": [value]}</code></td>
                 </tr>
                 <tr>
                   <td>USB Controller</td>
-                  <td>{"code": [code], request": type": "gamepad", id": [id], event_type": [type], value": [value]}</td>
+                  <td><code class="micro_code">{"code": [code], request": type": "gamepad", id": [id], event_type": [type], value": [value]}</code></td>
                 </tr>
+              </tbody>
           </table>
 
           </section>
@@ -270,7 +274,7 @@
 
             <h3 class="section__title">Creating custom functions</h3>
 
-            <p>You can create your own custom functions modifying the file <code class=micro_code>custom_actions.py</code> in <code class=micro_code>/usr/bin/RaspiMote/driver/driver/lan_server/custom_fcn</code> (Linux) or <code class=micro_code>C:\Program&nbsp;Files\RaspiMote\driver\driver\lan_server\custom_fcn</code> (Windows).</p>
+            <p>You can create your own custom functions modifying the file <code class=micro_code>custom_actions.py</code> in <code class=micro_code>/opt/raspimote/driver/driver/lan_server/custom_fcn</code> (Linux) or <code class=micro_code>C:\Program&nbsp;Files\RaspiMote\driver\driver\lan_server\custom_fcn</code> (Windows).</p>
 
             <p>For example, this function will open an alert box when triggered:</p>
 
@@ -295,7 +299,7 @@
 
             <p>To associate the function with a button, simply use the web-based configuration UI.</p>
 
-            <p>For example, the following configuration, once saved, will associate the button plugged on <code class="micro_code">GPIO 13</code> with the function <code class="micro_code"><yellow>alert</yellow>()</code>:</p>
+            <p>For example, the following configuration, once saved, will associate the button plugged on <code class="micro_code">GPIO 13</code> with the function <code class="micro_code">alert()</code>:</p>
 
             <img src="img/conf_alert_example.png" title="Configuration to run the function “alert()” with “GPIO 13”." alt="Configuration to run the function “alert()” with “GPIO 13”." class="in_text_img"/>
 
