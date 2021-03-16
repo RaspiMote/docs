@@ -18,6 +18,8 @@ def index():
         return redirect(request.url.replace("www.raspimote.tk", "raspimote.tk")), 301
     elif "ca.raspimote.tk" in request.url_root:
         return redirect(request.url.replace("ca.raspimote.tk", "ca.raspimote.tk:444")), 301
+    elif "status.raspimote.tk" in request.url_root:
+        return send_file("status_iframe.html")
     elif "raspimote.tk" in request.url_root:
         if any(ext in request.headers.get('User-Agent').lower() for ext in mobile_user_agents):
             return send_file("root_website_mob.html")
@@ -28,7 +30,7 @@ def index():
 
 @app.route('/mailto')
 def mailto():
-    if (not "docs.raspimote.tk" in request.url_root) and (not "ca.raspimote.tk" in request.url_root) and ("raspimote.tk" in request.url_root):
+    if (not "docs.raspimote.tk" in request.url_root) and (not "ca.raspimote.tk" in request.url_root) and (not "status.raspimote.tk" in request.url_root) and ("raspimote.tk" in request.url_root):
         return redirect("mailto:hello@raspimote.tk")
 
 @app.route('/css/<path:path>')

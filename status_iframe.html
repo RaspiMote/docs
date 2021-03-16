@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>RaspiMote status</title>
+        <link rel="icon" type="image/x-icon" href="img/RaspiMote_logo.ico"/>
+        <link rel="shortcut icon" type="image/x-icon" href="img/RaspiMote_logo.ico"/>
+        <style type="text/css">
+            body, html
+            {
+                margin: 0; padding: 0; height: 100%; overflow: hidden;
+            }
+
+            #content
+            {
+                position:absolute; left: 0; right: 0; bottom: 0; top: 0px; 
+                
+            }
+            a {
+                font-family: "Trebuchet MS";
+                font-size: 30px;
+                text-align: center;
+                margin-top: 50px;
+            }
+        </style>
+        <script type="text/javascript">
+            function init() {
+                $("#statuspage-iframe-raspimote").contents().find(".updates-dropdown-container").remove();
+                var test = $("#statuspage-iframe-raspimote").contents()
+                console.log(test);
+                console.log('?');
+            }
+        </script>
+        <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    </head>
+    <body onload="init()">
+        <div id="content">
+            <iframe width="100%" height="100%" frameborder="0" src="https://raspimote.statuspage.io/" id="statuspage-iframe-raspimote"><a href="https://raspimote.statuspage.io/">https://raspimote.statuspage.io/</a></iframe>
+        </div>
+    </body>
+</html>
