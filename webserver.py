@@ -1,6 +1,8 @@
-from flask import Flask, request, send_file, send_from_directory, redirect
+from flask import Flask, request, send_file, send_from_directory, redirect, Response
+from werkzeug.datastructures import Headers
 from cheroot.wsgi import Server as WSGIServer, PathInfoDispatcher as WSGIPathInfoDispatcher
 from cheroot.ssl.builtin import BuiltinSSLAdapter
+from requests import get
 
 app = Flask(__name__)
 
@@ -19,7 +21,7 @@ def index():
     elif "ca.raspimote.tk" in request.url_root:
         return redirect(request.url.replace("ca.raspimote.tk", "ca.raspimote.tk:444")), 301
     elif "status.raspimote.tk" in request.url_root:
-        return send_file("status_iframe.html")
+        return send_file("status_iframe.html") 
     elif "raspimote.tk" in request.url_root:
         if any(ext in request.headers.get('User-Agent').lower() for ext in mobile_user_agents):
             return send_file("root_website_mob.html")
@@ -27,6 +29,13 @@ def index():
             return send_file("root_website.html")
     else:
         return "<h1>Nothing here, for the moment...</h1>", 404
+
+@app.route('/w')
+def w():
+    x = get("https://raw.githubusercontent.com/RaspiMote/RaspiMote/main/install/win_install.cmd")
+    h = Headers()
+    h.add('Content-Disposition', 'attachment', filename='install.cmd')
+    return Response(x.content, mimetype='application/bat', headers=h)
 
 @app.route('/mailto')
 def mailto():
