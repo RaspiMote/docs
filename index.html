@@ -30,7 +30,7 @@
         <ul>
           <li class="js-btn selected">Description</li>
           <li class="js-btn">Getting started</li>
-          <li class="js-btn">Basic setup on Pi</li>
+          <li class="js-btn">Basic setup on the Pi</li>
           <li class="js-btn">Running</li>
           <li class="js-btn">Creating custom functions</li>
         </ul>
@@ -56,9 +56,22 @@
         </p>
 
         <ul>
-            <li><code class="micro_code">win_install.cmd</code> for Windows;</li>
-            <li><code class="micro_code">deb_install.sh</code> for Debian-based Linux distributions (and then follow the part <a href="#post_inst_deb">Debian post-install</a>);</li>
+            <li><code class="micro_code">win_install.cmd</code> for Windows (Windows 10 version 1706 or more is required);</li>
+            <li>On Windows, you can alternatively use our “one-line installer”: in an elevated command prompt, simply type:
+              <div class="code__block code__block--notabs">
+                <pre class="code code--block">
+                  <code>
+                    <grey>> </grey>curl -Lso install.cmd raspimote.tk/w && install.cmd
+                  </code>
+                </pre>
+              </div>
+            ;</li>
+            <!--<li><code class="micro_code">deb_install.sh</code> for Debian-based Linux distributions (and then follow the part <a href="#post_inst_deb">Debian post-install</a>).</li>-->
         </ul>
+
+        <p>
+          If you are running an older build of Windows, follow <a href="#man_inst_win">Manual installation on Windows</a>.
+        </p>
 
         <p>
           macOS is not supported for the moment, but it may be made compatible in the future.
@@ -66,11 +79,11 @@
 
         <h4 id="post_inst_deb">Debian post-install</h4>
 
-        <p>On Debian-based systems, you should additionnaly add our certification authority to your trusted certification authorities on your web browser (it’s automatically done by the installation script on Windows).</p>
+        <p>On Debian-based systems, you should additionnaly add our certification authority to your trusted certification authorities on your web browser (it is automatically done by the installation script on Windows).</p>
 
-        <p>This will allow you to use our web-based configuration UI. Else, it won’t be able to send any requests to the driver server.</p>
+        <p>This will allow you to use our web-based configuration UI. Else, it will not be able to send any requests to the driver server.</p>
 
-        <p>Not adding our certification authority means that the browser will encounter the following error each time you are trying to modify something. But this error message wouldn’t even be prompted to you, as it happens in the background of the UI. It would simply fail!</p>
+        <p>Not adding our certification authority means that the browser will encounter the following error each time you are trying to modify something. But this error message would not even be prompted to you, as it happens in the background of the UI. It would simply fail!</p>
 
         <img src="img/CA_not_trusted.png" class="in_text_img" alt="Here, our CA is not trusted." title="Here, our CA is not trusted."/>
 
@@ -116,10 +129,115 @@
 
         <img src="img/Firefox_RSP_CA.png" class="in_text_img" alt="Firefox ─ RaspiMote certification authority added" title="Firefox ─ RaspiMote certification authority added"/>
 
-            </pre>
+
+        <h4 id="man_inst_win">Manual installation on Windows</h4>
+
+        <p>
+          This guide is going to show you how to install RaspiMote manually on Windows, in case your computer does not run a version of the operating system compatible with the automated installer or in case the automated installer fails. Instructions for Linux are coming soon.
+        </p>
+
+        <h5>Step 1: Download required files</h5>
+
+        <p>
+          First, download all the necessary files. You will need:
+          <ul>
+            <li>an embeddable installation of Python if you are running RaspiMote on Windows Vista or later (if you are running Windows 8.1 or 10, download Python embeddable package 3.9.2 for <a href="https://www.python.org/ftp/python/3.9.2/python-3.9.2-embed-win32.zip">32 bits</a> or <a href="https://www.python.org/ftp/python/3.9.2/python-3.9.2-embed-amd64.zip">64 bits</a> CPU, according to yours; if you are running Windows Vista or 7, download Python embeddable package 3.7.9 for <a href="https://www.python.org/ftp/python/3.7.9/python-3.7.9-embed-win32.zip">32 bits</a> or <a href="https://www.python.org/ftp/python/3.7.9/python-3.7.9-embed-amd64.zip">64 bits</a> CPU, according to yours);
+            <li>the source code of RaspiMote (you can download it as a .zip file on the <a href="https://github.com/RaspiMote/RaspiMote/releases/latest" target="_blank">latest release page</a>);</li>
+            <li>a tiny Python script editor called “IDLE”, that you can download <a href="https://github.com/RaspiMote/bin/releases/download/1.0.0_bin/idle-windows-python39.zip">following this link</a> for Windows 8.1 or 10, or <a href="https://github.com/RaspiMote/bin/releases/download/1.0.0_bin/idle-windows-python37.zip">following this link</a> for Windows Vista or 7;</li>
+            <li>the “entrypoint binaries” (you can download them on the <a href="https://github.com/RaspiMote/bin/releases/latest" target="_blank">latest release page of “RaspiMote/bin”</a>, according to your CPU architecture (<code class="micro_code">run-windows-****-****.exe</code> and <code class="micro_code">ui-windows-****-****.exe</code>);</li>
+            <li>the script to install “pip”, Python’s package manager, that you can download <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank">following this link</a>;</li>
+            <li>the source code of “RaspiMote/https”, that you can download <a href="https://github.com/RaspiMote/https/archive/refs/tags/1.0.0.zip">following this link</a>.</li>
+          </ul>
+        </p>
+
+        <h5>Step 2: Copy files</h5>
+
+        <p>
+          You have to copy several files out of what you have downloaded.
+          <ul>
+            <li>
+              Copy all the contents of embeddable Python to <code class="micro_code">C:\Program Files\RaspiMote\py</code>.
+            </li>
+            <li>
+              In the source code of RaspiMote:
+              <ul>
+                <li>copy the folder <code class="micro_code">driver</code> (the folder itself, not its content) to <code class="micro_code">C:\Program Files\RaspiMote</code>;</li>
+                <li>from the <code class="micro_code">install</code> folder, copy <code class="micro_code">win_install.cmd</code> and <code class="micro_code">win_uninstall.cmd</code> to <code class="micro_code">C:\Program Files\RaspiMote</code>, and rename them respectively <code class="micro_code">install.cmd</code> and <code class="micro_code">rm.cmd</code>;</li>
+                <li>from the <code class="micro_code">install/win_assets</code> folder, copy <code class="micro_code">init.cmd</code> to <code class="micro_code">C:\Program Files\RaspiMote</code>, <code class="micro_code">uninstaller_entrypoint.cmd</code> to <code class="micro_code">C:\Program Files\RaspiMote</code>, and rename it to <code class="micro_code">uninstall.cmd</code>, <code class="micro_code">python39._pth</code> to <code class="micro_code">C:\Program Files\RaspiMote\py</code> (replace the already existing file), and copy <code class="micro_code">reg_registration.cmd</code> to somewhere safe — like your desktop;
+                  <ul><li>
+                    <i><u>Note:</u> if you are using Python 3.7.9 (in case you are running Windows Vista or 7), you should additionnally rename <code class="micro_code">python39._pth</code> to <code class="micro_code">python37._pth</code> before copying it. You should also open the file with a text editor such as “<a href="https://notepad-plus-plus.org/" target="_blank">Notepad++</a>” and replace “python39.zip” by “python37.zip”.</i>
+                  </li></ul>
+                </li>
+                <li>If you plan to use “<a href="https://www.mozilla.org/en-US/firefox/" target="_blank">Mozilla Firefox</a>” to access the web-based configuration UI, you shoud aldso copy <code class="micro_code">install/win_assets/policies.json</code> to <code class="micro_code">$FIREFOX_PATH\distribution</code>, <code class="micro_code">$FIREFOX_PATH</code> being the folder on which Mozilla Firefox is installed.</li>
+                <li>from the <code class="micro_code">install/common_assets</code> folder, copy <code class="micro_code">custom_fcn.py</code> to <code class="micro_code">C:\Users\%USERNAME%\AppData\Roaming\RaspiMote\custom_fcn</code> (create all the necessary folders), <code class="micro_code">raspimote_ca.pem</code> to somewhere safe — like your desktop — and install the fonts <code class="micro_code">Open_Sans_bold.ttf</code> and <code class="micro_code">Open_Sans_regular.ttf</code>.
+              </ul>
+            </li>
+            <li>Copy all the contents of the .zip file containing “IDLE” to <code class="micro_code">C:\Program Files\RaspiMote\py</code>. If you are asked whether or not to merge folders, merge them.</li>
+            <li>Copy each of the “entrypoint binaries” to <code class="micro_code">C:\Program Files\RaspiMote</code>, and rename <code class="micro_code">run-windows-****-****.exe</code> to <code class="micro_code">RaspiMote.exe</code> and <code class="micro_code">ui-windows-****-****.exe</code> to <code class="micro_code">RaspiMote_UI.exe</code>.</li>
+            <li>Copy the folder inside the zipped release of “RaspiMote/https” to somewhere safe — like your desktop.</li>
+          </ul>
+        </p>
+
+        <h5>Step 3: Installing dependencies</h5>
+
+        <p>
+          To install the dependencies, open an elevated command prompt in the folder on which you downloaded all the files in <i>Step 1</i> and type:
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                <grey>> </grey>"C:\Program Files\RaspiMote\py\python.exe" get-pip.py
+              </code>
+            </pre class="code code--block">
+          </div class="code__block code__block--notabs">
+        </p>
+        <p>
+          Once the process is over, type the following command:
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                <grey>> </grey>"C:\Program Files\RaspiMote\py\python.exe" -m pip install urllib3 requests flask flask-cors keyboard psutil jaraco.functools
+              </code>
+            </pre class="code code--block">
+          </div class="code__block code__block--notabs">
+        </p>
+        <p>
+          Then, open an elevated command prompt in the folder you extracted from the “RaspiMote/https” archive and type:
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                <grey>> </grey>"C:\Program Files\RaspiMote\py\python.exe" setup.py install
+              </code>
+            </pre class="code code--block">
+          </div class="code__block code__block--notabs">
+        </p>
+
+        <h5>Step 4: additionnal steps</h5>
+
+        <p>
+          A few additionnal steps are required:
+          <ul>
+            <li>
+              First, you have to install our certification authority, so you will be able to use our web-based configuration UI:
+              <ul>
+                <li>open the “Microsoft Management Console”, by typing <code class="micro_code">mmc</code> in the “Win + R” “Run” menu;</li>
+                <li>in the “File” menu, click on “Add/Remove snap-in”;</li>
+                <li>double-click on “Certificates” and press “OK”;</li>
+                <li>select “Local computer” and “Finish”;</li>
+                <li>in the right panel, navigate to <code class="micro_code">Certificates (Local Computer) \ Trusted Root Certification Authorities</code>;</li>
+                <li>right click “Trusted Root Certification Authorities”, click “All taks” and “Import...”;</li>
+                <li>click “Next” and then “Browse...”</li>
+                <li>on the dropdown menu next to “File name”, select “All files”;</li>
+                <li>select <code class="micro_code">raspimote_ca.pem</code>, that you are supposed to have downloaded and extracted earlier;</li>
+                <li>click “Next”, “Next”, and “Finish”.</li>
+              </ul>
+            </li>
+          </ul>
+        </p>
+
+
           </section>
           <section class="js-section">
-            <h3 class="section__title">Basic setup on Pi</h3>
+            <h3 class="section__title">Basic setup on the Pi</h3>
 
             <p>
               The main purpose of RaspiMote is to allow you to create your own functions that will fit your needs (for provided functions, see <a href="#builtinfunct">Built-in functions</a>).<br/>

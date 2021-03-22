@@ -28,6 +28,7 @@ html, body {
   border-width: 3px;
   border-color: #36363a;
   border-style: solid;
+  border-radius: 5px;
 }
 
 p, li {
@@ -110,6 +111,7 @@ hr {
   padding: 0 1.5rem;
   background-color: #36363a;
   color: #FFFFFF;
+  border-radius: 20px;
 }
 
 .code--inline {

@@ -127,6 +127,10 @@ blgreen {
   color: #26d2b6;
 }
 
+grey {
+  color: #686868;
+}
+
 .in_text_img {
   max-width: 100%;
 }
