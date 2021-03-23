@@ -1,5 +1,8 @@
 from flask import Flask, request, redirect, send_file
+from werkzeug.datastructures import Headers
 from waitress import serve
+from pdfkit import from_url
+from os import remove
 
 app = Flask(__name__)
 
@@ -21,7 +24,15 @@ def website():
 @app.route("/docs")
 def docs():
     if "old.raspimote.tk" in request.url_root:
-        return "No simplified version for old browsers is disponible now. Full version at <a href=\"https://docs.raspimote.tk/\">https://docs.raspimote.tk/</a>."
+        try:
+            remove("raspimote_documentation.pdf")
+        except:
+            pass
+        try:
+            from_url("https://docs.raspimote.tk", "raspimote_documentation.pdf")
+            return send_file("raspimote_documentation.pdf", mimetype='application/pdf')
+        except:
+            return "We couldn't generate a simplified version :/<br/>Full version at <a href=\"https://docs.raspimote.tk/\">https://docs.raspimote.tk/</a>."
     else:
         return redirect(request.url.replace("http://", "https://")), 301
 

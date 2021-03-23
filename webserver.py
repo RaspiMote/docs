@@ -18,8 +18,10 @@ def index():
     if "old.raspimote.tk" in request.url_root:
         return redirect("http://old.raspimote.tk/"), 301
     elif "docs.raspimote.tk" in request.url_root:
-        # check browser
-        return send_file("index.html")
+        if any(ext in request.headers.get('User-Agent').lower() for ext in old_user_agents):
+            return redirect("http://old.raspimote.tk/docs"), 301
+        else:
+            return send_file("index.html")
     elif "www.raspimote.tk" in request.url_root:
         return redirect(request.url.replace("www.raspimote.tk", "raspimote.tk")), 301
     elif "ca.raspimote.tk" in request.url_root:
