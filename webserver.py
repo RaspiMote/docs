@@ -47,6 +47,8 @@ def w():
 def old_docs():
     if "old.raspimote.tk" in request.url_root:
         return redirect("http://old.raspimote.tk/docs"), 301
+    elif "raspimote.tk" in request.url_root:
+        return redirect("https://docs.raspimote.tk/"), 301
 
 @app.route('/mailto')
 def mailto():

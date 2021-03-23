@@ -13,7 +13,7 @@ def https(e):
 def website():
     if "old.raspimote.tk" in request.url_root:
         return send_file("old_website.html")
-    elif any(ext in request.headers.get('User-Agent').lower() for ext in old_user_agents):
+    elif any(ext in request.headers.get('User-Agent').lower() for ext in old_user_agents) and ("/raspimote.tk" or "www.raspimote.tk") in request.url_root:
         return redirect("http://old.raspimote.tk/"), 301
     else:
         return redirect(request.url.replace("http://", "https://")), 301
