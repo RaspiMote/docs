@@ -14,7 +14,10 @@ def page_not_found(e):
 
 @app.route('/')
 def index():
-    if "docs.raspimote.tk" in request.url_root:
+    if "old.raspimote.tk" in request.url_root:
+        return redirect("http://old.raspimote.tk/"), 301
+    elif "docs.raspimote.tk" in request.url_root:
+        # check browser
         return send_file("index.html")
     elif "www.raspimote.tk" in request.url_root:
         return redirect(request.url.replace("www.raspimote.tk", "raspimote.tk")), 301
@@ -23,6 +26,7 @@ def index():
     elif "status.raspimote.tk" in request.url_root:
         return send_file("status_iframe.html") 
     elif "raspimote.tk" in request.url_root:
+        # check browser
         if any(ext in request.headers.get('User-Agent').lower() for ext in mobile_user_agents):
             return send_file("root_website_mob.html")
         else:
@@ -36,6 +40,11 @@ def w():
     h = Headers()
     h.add('Content-Disposition', 'attachment', filename='install.cmd')
     return Response(x.content, mimetype='application/bat', headers=h)
+
+@app.route('/docs')
+def old_docs():
+    if "old.raspimote.tk" in request.url_root:
+        return redirect("http://old.raspimote.tk/docs"), 301
 
 @app.route('/mailto')
 def mailto():

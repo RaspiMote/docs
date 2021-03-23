@@ -1,0 +1,28 @@
+html, body {
+    margin: 20px;
+    font-family: "Arial";
+}
+
+.title_div {
+    text-align: center;
+    font-size: 20px;
+}
+
+.logo_img {
+    height: 100px;
+}
+
+p {
+    font-size: 15px;
+    margin-left: 100px;
+    margin-right: 100px;
+    text-align: center;
+}
+
+.buttons {
+    text-align: center;
+}
+
+footer {
+    text-align: right;
+}
