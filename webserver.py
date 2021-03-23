@@ -7,6 +7,7 @@ from requests import get
 app = Flask(__name__)
 
 mobile_user_agents = ["opera mini", "android", "fennec", "mobile", "iphone", "symbian", "blackberry", "nexus", "nokia"]
+old_user_agents = ["msie", "internet explorer", "netscape", "trident", "navigator/"]
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -26,8 +27,9 @@ def index():
     elif "status.raspimote.tk" in request.url_root:
         return send_file("status_iframe.html") 
     elif "raspimote.tk" in request.url_root:
-        # check browser
-        if any(ext in request.headers.get('User-Agent').lower() for ext in mobile_user_agents):
+        if any(ext in request.headers.get('User-Agent').lower() for ext in old_user_agents):
+            return redirect("http://old.raspimote.tk/"), 301
+        elif any(ext in request.headers.get('User-Agent').lower() for ext in mobile_user_agents):
             return send_file("root_website_mob.html")
         else:
             return send_file("root_website.html")

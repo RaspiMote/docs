@@ -23,6 +23,10 @@ p {
     text-align: center;
 }
 
-footer {
+a {
+    text-decoration: none;
+}
+
+.old_footer {
     text-align: right;
 }

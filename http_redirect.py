@@ -3,6 +3,8 @@ from waitress import serve
 
 app = Flask(__name__)
 
+old_user_agents = ["msie", "internet explorer", "netscape", "trident", "navigator/"]
+
 @app.errorhandler(404)
 def https(e):
     return redirect(request.url.replace("http://", "https://")), 301
@@ -11,13 +13,15 @@ def https(e):
 def website():
     if "old.raspimote.tk" in request.url_root:
         return send_file("old_website.html")
+    elif any(ext in request.headers.get('User-Agent').lower() for ext in old_user_agents):
+        return redirect("http://old.raspimote.tk/"), 301
     else:
         return redirect(request.url.replace("http://", "https://")), 301
 
 @app.route("/docs")
 def docs():
     if "old.raspimote.tk" in request.url_root:
-        return "Soon."
+        return "No simplified version for old browsers is disponible now. Full version at <a href=\"https://docs.raspimote.tk/\">https://docs.raspimote.tk/</a>."
     else:
         return redirect(request.url.replace("http://", "https://")), 301
 
@@ -25,13 +29,6 @@ def docs():
 def css():
     if "old.raspimote.tk" in request.url_root:
         return send_file("css/old_website.css")
-    else:
-        return redirect(request.url.replace("http://", "https://")), 301
-
-@app.route("/old_website.js")
-def js():
-    if "old.raspimote.tk" in request.url_root:
-        return send_file("js/old_website.js")
     else:
         return redirect(request.url.replace("http://", "https://")), 301
 
