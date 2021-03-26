@@ -114,6 +114,14 @@ hr {
   border-radius: 20px;
 }
 
+.code--powblock {
+  white-space: pre-line;
+  padding: 0 1.5rem;
+  background-color: #181846;
+  color: #FFFFFF;
+  border-radius: 20px;
+}
+
 .code--inline {
   padding: 3px 6px;
   font-size: 80%;

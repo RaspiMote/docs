@@ -52,11 +52,11 @@
         <h3 class="section__title">Getting started</h3>
 
         <p>
-            To install RaspiMote on your PC, transfer the <code class="micro_code">pi</code> folder to your Raspberry Pi and the <code class="micro_code">driver</code> folder to your computer, then you can run the provided scripts:
+            To install RaspiMote on your PC, transfer the <code class="micro_code">pi</code> folder to your Raspberry Pi and the <code class="micro_code">driver</code> folder to your computer, then you can run the provided scripts, with administrative permissions:
         </p>
 
         <ul>
-            <li><code class="micro_code">win_install.cmd</code> for Windows (Windows 10 version 1706 or more is required);</li>
+            <li><code class="micro_code">win_install.cmd</code> for Windows (Windows 10 version 1803 or more is required);</li>
             <li>On Windows, you can alternatively use our “one-line installer”: in an elevated command prompt, simply type:
               <div class="code__block code__block--notabs">
                 <pre class="code code--block">
@@ -136,6 +136,10 @@
           This guide is going to show you how to install RaspiMote manually on Windows, in case your computer does not run a version of the operating system compatible with the automated installer or in case the automated installer fails. Instructions for Linux are coming soon.
         </p>
 
+        <p>
+          All Windows versions from Windows Vista are theoretically supported, although you might encounter some errors in the web-based UI with some older web browsers, that do not support properly the JS functions we are using.
+        </p>
+
         <h5>Step 1: Download required files</h5>
 
         <p>
@@ -165,7 +169,7 @@
                 <li>from the <code class="micro_code">install</code> folder, copy <code class="micro_code">win_install.cmd</code> and <code class="micro_code">win_uninstall.cmd</code> to <code class="micro_code">C:\Program Files\RaspiMote</code>, and rename them respectively <code class="micro_code">install.cmd</code> and <code class="micro_code">rm.cmd</code>;</li>
                 <li>from the <code class="micro_code">install/win_assets</code> folder, copy <code class="micro_code">init.cmd</code> to <code class="micro_code">C:\Program Files\RaspiMote</code>, <code class="micro_code">uninstaller_entrypoint.cmd</code> to <code class="micro_code">C:\Program Files\RaspiMote</code>, and rename it to <code class="micro_code">uninstall.cmd</code>, <code class="micro_code">python39._pth</code> to <code class="micro_code">C:\Program Files\RaspiMote\py</code> (replace the already existing file), and copy <code class="micro_code">reg_registration.cmd</code> to somewhere safe — like your desktop;
                   <ul><li>
-                    <i><u>Note:</u> if you are using Python 3.7.9 (in case you are running Windows Vista or 7), you should additionnally rename <code class="micro_code">python39._pth</code> to <code class="micro_code">python37._pth</code> before copying it. You should also open the file with a text editor such as “<a href="https://notepad-plus-plus.org/" target="_blank">Notepad++</a>” and replace “python39.zip” by “python37.zip”.</i>
+                    <i><u>Note:</u> if you are using Python 3.7.9 (in case you are running Windows Vista or 7), you should copy </i><code class="micro_code">python37._pth</code><i> instead of </i><code class="micro_code">python39._pth</code><i>.</i>
                   </li></ul>
                 </li>
                 <li>If you plan to use “<a href="https://www.mozilla.org/en-US/firefox/" target="_blank">Mozilla Firefox</a>” to access the web-based configuration UI, you shoud aldso copy <code class="micro_code">install/win_assets/policies.json</code> to <code class="micro_code">$FIREFOX_PATH\distribution</code>, <code class="micro_code">$FIREFOX_PATH</code> being the folder on which Mozilla Firefox is installed.</li>
@@ -224,14 +228,41 @@
                 <li>double-click on “Certificates” and press “OK”;</li>
                 <li>select “Local computer” and “Finish”;</li>
                 <li>in the right panel, navigate to <code class="micro_code">Certificates (Local Computer) \ Trusted Root Certification Authorities</code>;</li>
-                <li>right click “Trusted Root Certification Authorities”, click “All taks” and “Import...”;</li>
+                <li>right-click “Trusted Root Certification Authorities”, click “All taks” and “Import...”;</li>
                 <li>click “Next” and then “Browse...”</li>
                 <li>on the dropdown menu next to “File name”, select “All files”;</li>
                 <li>select <code class="micro_code">raspimote_ca.pem</code>, that you are supposed to have downloaded and extracted earlier;</li>
                 <li>click “Next”, “Next”, and “Finish”.</li>
               </ul>
             </li>
+            <li>
+              Then, run the script <code class="micro_code">reg_registration.cmd</code> — that you copied earlier — with administrative permissions. It will add RaspiMote to the “Programs and Features” menu.
+            </li>
+            <li>
+              Then, if you are running Windows 7 or later, in an elevated PowerShell, type:
+              <div class="code__block code__block--notabs">
+                <pre class="code code--powblock">
+                  <code>
+                    <grey>PS > </grey>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+                  </code>
+                </pre class="code code--powblock">
+              </div class="code__block code__block--notabs">
+            </li>
+            <li>
+              Finally, create shortcuts to the “entrypoint binaries”:
+              <ul>
+                <li>create the folder <code class="micro_code">C:\ProgramData\Microsoft\Windows\Start Menu\Programs\RaspiMote</code>;</li>
+                <li>create shortcuts for <code class="micro_code">C:\Program Files\RaspiMote\RaspiMote.exe</code> and <code class="micro_code">C:\Program Files\RaspiMote\RaspiMote_UI.exe</code> in the folder you just created (you can choose the name you want for the shortcuts, simply be aware that <code class="micro_code">RaspiMote.exe</code> runs the driver and that <code class="micro_code">RaspiMote_UI.exe</code> runs the web-based UI);</li>
+                <li>create a shortcut for <code class="micro_code">C:\Program Files\RaspiMote\RaspiMote.exe</code> in <code class="micro_code">C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</code>.</li>
+              </ul>
+            </li>
           </ul>
+        </p>
+
+        <p>
+          <b>
+            RaspiMote is successfully installed on your computer!
+          </b>
         </p>
 
 
